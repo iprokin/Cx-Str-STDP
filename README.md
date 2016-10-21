@@ -1,11 +1,11 @@
 This is the readme for the model
-\
+  
 "Endocannabinoid dynamics gate spike-timing dependent depression and potentiation"
-\
+  
 Yihui Cui, Ilya Prokin, Hao Xu, Bruno Delord, Stephane Genet, Laurent Venance, Hugues Berry
-\
+  
 <https://elifesciences.org/content/5/e13185>
-\
+  
 A copy of the code can be found here <https://senselab.med.yale.edu/modeldb/ShowModel.cshtml?model=187605>.
 
 
@@ -76,8 +76,8 @@ Usage note
 manually install dependencies e.g. with your package manager, or to do it
 automatically use the script "install_dependencies.sh". The script will
 try to detect your system's package manager and suggest packages to
-install. To use it, call:\
-
+install. To use it, call:
+  
     ```{.sh}
     bash install_dependencies.sh
     ```
