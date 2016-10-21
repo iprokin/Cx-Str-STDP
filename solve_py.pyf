@@ -1,0 +1,144 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module solve_py ! in 
+    interface  ! in :solve_py
+        subroutine lsoda_calc(y,istatus,y0,lv,t,n) ! in :solve_py:solve_py.f95
+            use comp_part
+            real*8 dimension(32,n),intent(out),depend(n),intent(out) :: y
+            integer intent(out) :: istatus
+            real*8 dimension(32),intent(in) :: y0
+            real*8 dimension(165),intent(in) :: lv
+            real*8 dimension(n),intent(in) :: t
+            integer, optional,intent(in),check(len(t)>=n),depend(t) :: n=len(t)
+        end subroutine lsoda_calc
+        subroutine fex(neq,t,y,ydot) ! in :solve_py:solve_py.f95
+            use comp_part
+            integer, optional,intent(in),check(len(y)>=neq),depend(y) :: neq=len(y)
+            real*8 intent(in) :: t
+            real*8 dimension(neq),intent(in) :: y
+            real*8 dimension(neq),intent(out),depend(neq) :: ydot
+        end subroutine fex
+        module extras ! in :solve_py:solve_py.f95
+            use comp_part
+            subroutine cam_conc_func(ca_cyt,n,lv,cam) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: ca_cyt
+                integer, optional,intent(in),check(len(ca_cyt)>=n),depend(ca_cyt,n) ca_cy) :: n=len(ca_cyt)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: cam
+            end subroutine cam_conc_func
+            subroutine camkiipho(y,n,camkiipho_answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n,13),intent(in) :: y
+                integer, optional,intent(in),check(shape(y,0)==n),depend(y,n)) :: n=shape(y,0)
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: camkiipho_answer
+            end subroutine camkiipho
+            subroutine camkiipho_4f(y,n,camkiipho_answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(13,n),intent(in) :: y
+                integer, optional,intent(in),check(shape(y,1)==n),depend(y,n)) :: n=shape(y,1)
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: camkiipho_answer
+            end subroutine camkiipho_4f
+            subroutine ical_cal13(v,h,m,calo,cali,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: v
+                real*8 dimension(n),intent(in),depend(n) :: h
+                real*8 dimension(n),intent(in),depend(n) :: m
+                real*8 intent(in) :: calo
+                real*8 dimension(n),intent(in),depend(n) :: cali
+                integer, optional,intent(in),check(len(v)>=n),depend(v) :: n=len(v)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine ical_cal13
+            subroutine i_trpv1(aea,v,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: aea
+                real*8 dimension(n),intent(in),depend(n) :: v
+                integer, optional,intent(in),check(len(aea)>=n),depend(aea) :: n=len(aea)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine i_trpv1
+            subroutine j_ca_trpv1(aea,ca_cyt,v,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: aea
+                real*8 dimension(n),intent(in),depend(n) :: ca_cyt
+                real*8 dimension(n),intent(in),depend(n) :: v
+                integer, optional,intent(in),check(len(aea)>=n),depend(aea) :: n=len(aea)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine j_ca_trpv1
+            subroutine i_ampa(v,o_ampa,gampamax,n,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: v
+                real*8 dimension(n),intent(in),depend(n) :: o_ampa
+                real*8 intent(in) :: gampamax
+                integer, optional,intent(in),check(len(v)>=n),depend(v) :: n=len(v)
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine i_ampa
+            subroutine i_nmda(v,o_nmda,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: v
+                real*8 dimension(n),intent(in),depend(n) :: o_nmda
+                integer, optional,intent(in),check(len(v)>=n),depend(v) :: n=len(v)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine i_nmda
+            subroutine j_ca_nmda(v,ca_cyt,o_nmda,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: v
+                real*8 dimension(n),intent(in),depend(n) :: ca_cyt
+                real*8 dimension(n),intent(in),depend(n) :: o_nmda
+                integer, optional,intent(in),check(len(v)>=n),depend(v) :: n=len(v)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine j_ca_nmda
+            subroutine jip3r_cicr(ip3,ca_cyt,ca_er,h,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: ip3
+                real*8 dimension(n),intent(in),depend(n) :: ca_cyt
+                real*8 dimension(n),intent(in),depend(n) :: ca_er
+                real*8 dimension(n),intent(in),depend(n) :: h
+                integer, optional,intent(in),check(len(ip3)>=n),depend(ip3) :: n=len(ip3)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine jip3r_cicr
+            subroutine jserca_cicr(ca_cyt,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: ca_cyt
+                integer, optional,intent(in),check(len(ca_cyt)>=n),depend(ca_cyt) :: n=len(ca_cyt)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine jserca_cicr
+            subroutine jleak_cicr(ca_cyt,ca_er,n,lv,answer) ! in :solve_py:solve_py.f95:extras
+                real*8 dimension(n),intent(in) :: ca_cyt
+                real*8 dimension(n),intent(in),depend(n) :: ca_er
+                integer, optional,intent(in),check(len(ca_cyt)>=n),depend(ca_cyt) :: n=len(ca_cyt)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n),intent(out) :: answer
+            end subroutine jleak_cicr
+        end module extras
+        module steady_states ! in :solve_py:solve_py.f95
+            use comp_part
+            subroutine h0_m0_cal13(v,n,lv,h,m) ! in :solve_py:solve_py.f95:steady_states
+                real*8 dimension(n),intent(in) :: v
+                integer, optional,intent(in),check(len(v)>=n),depend(v) :: n=len(v)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n) :: h
+                real*8 dimension(n),intent(out),depend(n) :: m
+            end subroutine h0_m0_cal13
+            subroutine o0_nmda(glu,n,lv,o_nmda) ! in :solve_py:solve_py.f95:steady_states
+                real*8 dimension(n),intent(in) :: glu
+                integer, optional,intent(in),check(len(glu)>=n),depend(glu) :: n=len(glu)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n) :: o_nmda
+            end subroutine o0_nmda
+            subroutine h0_cicr(ca_cyt,ip3,n,lv,h_cicr) ! in :solve_py:solve_py.f95:steady_states
+                real*8 dimension(n),intent(in) :: ca_cyt
+                real*8 dimension(n),intent(in),depend(n) :: ip3
+                integer, optional,intent(in),check(len(ca_cyt)>=n),depend(ca_cyt) :: n=len(ca_cyt)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n) :: h_cicr
+            end subroutine h0_cicr
+            subroutine o0_d0_ampa(glu,n,lv,o_ampa0,d_ampa0) ! in :solve_py:solve_py.f95:steady_states
+                real*8 dimension(n),intent(in) :: glu
+                integer, optional,intent(in),check(len(glu)>=n),depend(glu) :: n=len(glu)
+                real*8 dimension(165),intent(in) :: lv
+                real*8 dimension(n),intent(out),depend(n) :: o_ampa0
+                real*8 dimension(n),intent(out),depend(n) :: d_ampa0
+            end subroutine o0_d0_ampa
+        end module steady_states
+    end interface 
+end python module solve_py
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
