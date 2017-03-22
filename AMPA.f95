@@ -1,5 +1,5 @@
 !    -*- f95 -*-
-! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://sites.google.com/site/ilyaprokin
+! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://iprokin.github.io
 ! INRIA Rhone-Alpes
 ! STDP model : An implementation of simple AMPAR model of Destexhe, A, Z F Mainen, and T J Sejnowski. “Synthesis of Models for
 ! Excitable Membranes, Synaptic Transmission and Neuromodulation Using a Common Kinetic Formalism.” Journal of Computational

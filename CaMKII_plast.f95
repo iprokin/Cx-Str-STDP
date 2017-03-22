@@ -1,5 +1,5 @@
 !    -*- f95 -*-
-! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://sites.google.com/site/ilyaprokin
+! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://iprokin.github.io
 ! INRIA Rhone-Alpes
 ! STDP model : An implementation of bistable CaMKII model of Graupner, Michael, and Nicolas Brunel. “STDP in a Bistable Synapse Model Based on CaMKII and
 ! Associated Signaling Pathways.” Edited by Karl J Friston. PLoS Computational Biology 3, no. 11 (November 2007): e221–e221.

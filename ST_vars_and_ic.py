@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://sites.google.com/site/ilyaprokin
+# (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://iprokin.github.io
 # INRIA Rhone-Alpes
 # STDP model : variables' names and initial values
 import numpy as np

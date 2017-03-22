@@ -1,5 +1,5 @@
 !    -*- f95 -*-
-! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://sites.google.com/site/ilyaprokin
+! (c) 2016 - Ilya Prokin - isprokin@gmail.com - https://iprokin.github.io
 ! INRIA Rhone-Alpes
 ! STDP model : Voltage-Dependent Calcium Channel L-type (1.3)
 ! converted from https://senselab.med.yale.edu/modeldb/showModel.cshtml?model=112834&file=%2Fnacb_msp%2FcaL13.mod (Wolf et al 2005)
