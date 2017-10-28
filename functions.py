@@ -6,6 +6,7 @@ from copy import deepcopy
 import numpy as np
 import solve_py
 
+
 def pmap(f, xs):
     from multiprocessing import cpu_count, Pool
     p = Pool(cpu_count())
@@ -25,10 +26,10 @@ def interpolate_and_gsmooth(x, y, xnew, sdx):
 
 def nesteddict_to_lists_r(d, keys=None):
     from collections import OrderedDict
-    """converts nested dict to the list of keys and the list of values
-    keys - is the selecton of top level keys to be considered
-    (all top keys taken if not set)
-    """
+    #converts nested dict to the list of keys and the list of values
+    #keys - is the selecton of top level keys to be considered
+    #(all top keys taken if not set)
+
     lv, lk = [], []
     if keys is None:
         keys = d.keys()
@@ -48,7 +49,7 @@ def find_y0(y0, lv, lk, t_end=200, t_step=1e-3):
     for ind in [lk.index('stimulation, pre_on'), lk.index('stimulation, post_on'), lk.index('stimulation, num_stim')]:
         lv0[ind] = 0
     t = np.arange(0, t_end, t_step)
-    y, ISTATE = solve_py.lsoda_calc(y0, lv0, t)
+    y, _ = solve_py.lsoda_calc(y0, lv0, t)
     return y[:,-1] # that's it!
 
 
